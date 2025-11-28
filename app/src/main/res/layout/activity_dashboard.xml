@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    style="@style/bg_style"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DashboardActivity">
+
+    <TextView
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_gravity="center"
+        style="@style/text_16"
+        android:text="Welcome" />
+
+    <TextView
+        android:id="@+id/dashboard_email"
+        android:layout_gravity="center"
+        style="@style/text_22"
+        android:text="a@gmail.com"
+        android:textStyle="bold" />
+
+</LinearLayout>
