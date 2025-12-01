@@ -2,12 +2,19 @@ package internship.nov;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -16,9 +23,17 @@ import androidx.core.view.WindowInsetsCompat;
 public class SignupActivity extends AppCompatActivity {
 
     EditText username,email,password,confirmPassword;
+    CheckBox terms;
     Button signup;
     TextView login;
+
+    //RadioButton male,female;
+    RadioGroup gender;
+
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+    String[] cityArray = {"Ahmedabad","Vadodara","Surat","Rajkot","Gandhinagar"};
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +50,51 @@ public class SignupActivity extends AppCompatActivity {
         email = findViewById(R.id.signup_email);
         password = findViewById(R.id.signup_password);
         confirmPassword = findViewById(R.id.signup_confirm_password);
+
+        terms = findViewById(R.id.signup_terms);
+        spinner = findViewById(R.id.signup_city);
+
+        ArrayAdapter adapter = new ArrayAdapter(SignupActivity.this, android.R.layout.simple_list_item_1,cityArray);
+        adapter.setDropDownViewResource(android.R.layout.simple_list_item_checked);
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(SignupActivity.this, cityArray[i], Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        gender = findViewById(R.id.signup_gender);
+        gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(@NonNull RadioGroup radioGroup, int i) {
+                RadioButton radioButton = findViewById(i);
+                Toast.makeText(SignupActivity.this, radioButton.getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        /*male = findViewById(R.id.signup_male);
+        female = findViewById(R.id.signup_female);
+
+        male.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(SignupActivity.this, male.getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        female.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(SignupActivity.this, female.getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });*/
 
         signup = findViewById(R.id.signup_button);
 
@@ -64,6 +124,12 @@ public class SignupActivity extends AppCompatActivity {
                 }
                 else if(!password.getText().toString().trim().matches(confirmPassword.getText().toString().trim())){
                     confirmPassword.setError("Password Does Not Match");
+                }
+                else if(gender.getCheckedRadioButtonId() == -1){
+                    Toast.makeText(SignupActivity.this, "Please Select Gender", Toast.LENGTH_SHORT).show();
+                }
+                else if(!terms.isChecked()){
+                    Toast.makeText(SignupActivity.this, "Please Accept Terms & Conditions", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     Toast.makeText(SignupActivity.this, "Signup Successfully", Toast.LENGTH_SHORT).show();
