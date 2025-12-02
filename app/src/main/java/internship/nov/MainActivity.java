@@ -1,6 +1,9 @@
 package internship.nov;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     EditText password;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     TextView signup;
+    SQLiteDatabase db;
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,12 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        db = openOrCreateDatabase("Internship.db", MODE_PRIVATE, null);
+        String tableQuery = "CREATE TABLE IF NOT EXISTS USERS(USERID INTEGER PRIMARY KEY AUTOINCREMENT,NAME VARCHAR(50),EMAIL VARCHAR(50),PASSWORD VARCHAR(50),GENDER VARCHAR(10),CITY VARCHAR(20))";
+        db.execSQL(tableQuery);
+
+        sp = getSharedPreferences(ConstantSp.PREF,MODE_PRIVATE);
 
         email = findViewById(R.id.main_email);
         password = findViewById(R.id.main_password);
@@ -66,13 +77,40 @@ public class MainActivity extends AppCompatActivity {
                     password.setError("Min. 6 Char Password Required");
                 }
                 else {
-                    System.out.println("Login Successfully");
-                    Log.d("RESPONSE", "Login Successfully");
-                    Toast.makeText(MainActivity.this, "Login Successfully", Toast.LENGTH_LONG).show();
-                    Snackbar.make(view, "Login Successfully", Snackbar.LENGTH_SHORT).show();
+                    String selectQuery = "SELECT * FROM USERS WHERE EMAIL='"+email.getText().toString()+"' AND PASSWORD='"+password.getText().toString()+"'";
+                    Cursor cursor = db.rawQuery(selectQuery,null);
+                    if(cursor.getCount()>0){
 
-                    Intent intent = new Intent(MainActivity.this,DashboardActivity.class);
-                    startActivity(intent);
+                        while (cursor.moveToNext()){
+                            String sUserId = cursor.getString(0);
+                            String sName = cursor.getString(1);
+                            String sEmail = cursor.getString(2);
+                            String sPassword = cursor.getString(3);
+                            String sGender = cursor.getString(4);
+                            String sCity = cursor.getString(5);
+
+                            Log.d("RESPONSE",sUserId+"\n"+sName+"\n"+sEmail+"\n"+sPassword+"\n"+sGender+"\n"+sCity);
+
+                            sp.edit().putString(ConstantSp.USERID,sUserId).commit();
+                            sp.edit().putString(ConstantSp.NAME,sName).commit();
+                            sp.edit().putString(ConstantSp.EMAIL,sEmail).commit();
+                            sp.edit().putString(ConstantSp.PASSWORD,sPassword).commit();
+                            sp.edit().putString(ConstantSp.GENDER,sGender).commit();
+                            sp.edit().putString(ConstantSp.CITY,sCity).commit();
+
+                        }
+
+                        System.out.println("Login Successfully");
+                        Log.d("RESPONSE", "Login Successfully");
+                        Toast.makeText(MainActivity.this, "Login Successfully", Toast.LENGTH_LONG).show();
+                        Snackbar.make(view, "Login Successfully", Snackbar.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(MainActivity.this,DashboardActivity.class);
+                        startActivity(intent);
+                    }
+                    else{
+                        Toast.makeText(MainActivity.this, "Invalid Email Id/Password", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

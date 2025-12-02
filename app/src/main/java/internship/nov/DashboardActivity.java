@@ -1,5 +1,6 @@
 package internship.nov;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class DashboardActivity extends AppCompatActivity {
 
     TextView email;
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +26,10 @@ public class DashboardActivity extends AppCompatActivity {
             return insets;
         });
 
+        sp = getSharedPreferences(ConstantSp.PREF,MODE_PRIVATE);
+
         email = findViewById(R.id.dashboard_email);
-        email.setText(MainActivity.email.getText().toString());
+        email.setText(sp.getString(ConstantSp.NAME,""));
 
     }
 }

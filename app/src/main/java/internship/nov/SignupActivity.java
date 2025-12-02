@@ -1,5 +1,7 @@
 package internship.nov;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,7 +24,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class SignupActivity extends AppCompatActivity {
 
-    EditText username,email,password,confirmPassword;
+    EditText username, email, password, confirmPassword;
     CheckBox terms;
     Button signup;
     TextView login;
@@ -32,8 +34,12 @@ public class SignupActivity extends AppCompatActivity {
 
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-    String[] cityArray = {"Ahmedabad","Vadodara","Surat","Rajkot","Gandhinagar"};
+    String[] cityArray = {"Ahmedabad", "Vadodara", "Surat", "Rajkot", "Gandhinagar"};
     Spinner spinner;
+
+    SQLiteDatabase db;
+    String sGender;
+    String sCity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +52,10 @@ public class SignupActivity extends AppCompatActivity {
             return insets;
         });
 
+        db = openOrCreateDatabase("Internship.db", MODE_PRIVATE, null);
+        String tableQuery = "CREATE TABLE IF NOT EXISTS USERS(USERID INTEGER PRIMARY KEY AUTOINCREMENT,NAME VARCHAR(50),EMAIL VARCHAR(50),PASSWORD VARCHAR(50),GENDER VARCHAR(10),CITY VARCHAR(20))";
+        db.execSQL(tableQuery);
+
         username = findViewById(R.id.signup_username);
         email = findViewById(R.id.signup_email);
         password = findViewById(R.id.signup_password);
@@ -54,14 +64,15 @@ public class SignupActivity extends AppCompatActivity {
         terms = findViewById(R.id.signup_terms);
         spinner = findViewById(R.id.signup_city);
 
-        ArrayAdapter adapter = new ArrayAdapter(SignupActivity.this, android.R.layout.simple_list_item_1,cityArray);
+        ArrayAdapter adapter = new ArrayAdapter(SignupActivity.this, android.R.layout.simple_list_item_1, cityArray);
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_checked);
         spinner.setAdapter(adapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(SignupActivity.this, cityArray[i], Toast.LENGTH_SHORT).show();
+                sCity = cityArray[i];
+                Toast.makeText(SignupActivity.this, sCity, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -75,7 +86,8 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(@NonNull RadioGroup radioGroup, int i) {
                 RadioButton radioButton = findViewById(i);
-                Toast.makeText(SignupActivity.this, radioButton.getText().toString(), Toast.LENGTH_SHORT).show();
+                sGender = radioButton.getText().toString();
+                Toast.makeText(SignupActivity.this, sGender, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -101,39 +113,37 @@ public class SignupActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(username.getText().toString().trim().equals("")){
+                if (username.getText().toString().trim().equals("")) {
                     username.setError("Username Required");
-                }
-                else if(email.getText().toString().trim().equals("")){
+                } else if (email.getText().toString().trim().equals("")) {
                     email.setError("Email Id Required");
-                }
-                else if(!email.getText().toString().trim().matches(emailPattern)){
+                } else if (!email.getText().toString().trim().matches(emailPattern)) {
                     email.setError("Valid Email Id Required");
-                }
-                else if(password.getText().toString().trim().equals("")){
+                } else if (password.getText().toString().trim().equals("")) {
                     password.setError("Password Required");
-                }
-                else if(password.getText().toString().trim().length()<6){
+                } else if (password.getText().toString().trim().length() < 6) {
                     password.setError("Min. 6 Char Password Required");
-                }
-                else if(confirmPassword.getText().toString().trim().equals("")){
+                } else if (confirmPassword.getText().toString().trim().equals("")) {
                     confirmPassword.setError("Confirm Password Required");
-                }
-                else if(confirmPassword.getText().toString().trim().length()<6){
+                } else if (confirmPassword.getText().toString().trim().length() < 6) {
                     confirmPassword.setError("Min. 6 Char Confirm Password Required");
-                }
-                else if(!password.getText().toString().trim().matches(confirmPassword.getText().toString().trim())){
+                } else if (!password.getText().toString().trim().matches(confirmPassword.getText().toString().trim())) {
                     confirmPassword.setError("Password Does Not Match");
-                }
-                else if(gender.getCheckedRadioButtonId() == -1){
+                } else if (gender.getCheckedRadioButtonId() == -1) {
                     Toast.makeText(SignupActivity.this, "Please Select Gender", Toast.LENGTH_SHORT).show();
-                }
-                else if(!terms.isChecked()){
+                } else if (!terms.isChecked()) {
                     Toast.makeText(SignupActivity.this, "Please Accept Terms & Conditions", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(SignupActivity.this, "Signup Successfully", Toast.LENGTH_SHORT).show();
-                    onBackPressed();
+                } else {
+                    String selectQuery = "SELECT * FROM USERS WHERE EMAIL='" + email.getText().toString() + "'";
+                    Cursor cursor = db.rawQuery(selectQuery, null);
+                    if (cursor.getCount() > 0) {
+                        Toast.makeText(SignupActivity.this, "Email Id Already Registered", Toast.LENGTH_SHORT).show();
+                    } else {
+                        String insertQuery = "INSERT INTO USERS VALUES(NULL,'" + username.getText().toString() + "','" + email.getText().toString() + "','" + password.getText().toString() + "','" + sGender + "','" + sCity + "')";
+                        db.execSQL(insertQuery);
+                        Toast.makeText(SignupActivity.this, "Signup Successfully", Toast.LENGTH_SHORT).show();
+                        onBackPressed();
+                    }
                 }
             }
         });
