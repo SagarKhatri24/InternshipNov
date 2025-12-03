@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(MainActivity.this,DashboardActivity.class);
                         startActivity(intent);
+                        finish();
                     }
                     else{
                         Toast.makeText(MainActivity.this, "Invalid Email Id/Password", Toast.LENGTH_SHORT).show();

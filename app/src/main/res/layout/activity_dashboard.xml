@@ -4,22 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     style="@style/bg_style"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".DashboardActivity">
 
     <TextView
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_gravity="center"
         style="@style/text_16"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_20sdp"
         android:text="Welcome" />
 
     <TextView
         android:id="@+id/dashboard_email"
-        android:layout_gravity="center"
         style="@style/text_22"
+        android:layout_gravity="center"
         android:text="a@gmail.com"
         android:textStyle="bold" />
+
+    <Button
+        android:layout_marginTop="@dimen/_30sdp"
+        android:id="@+id/dashboard_profile"
+        style="@style/button_16"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:text="Profile" />
+
+    <Button
+        android:layout_marginTop="@dimen/_10sdp"
+        android:id="@+id/dashboard_delete_profile"
+        style="@style/button_16"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:text="Delete Profile" />
+
+    <Button
+        android:layout_marginTop="@dimen/_10sdp"
+        android:id="@+id/dashboard_logout"
+        style="@style/button_16"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:text="Logout" />
 
 </LinearLayout>
