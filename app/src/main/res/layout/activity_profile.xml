@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    style="@style/bg_style"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:padding="@dimen/_10sdp">
+
+            <TextView
+                style="@style/text_14"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="Username"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:layout_marginVertical="@dimen/_5sdp"
+                app:cardBackgroundColor="@color/bg_color"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:cardElevation="@dimen/_3sdp">
+
+                <EditText
+                    android:id="@+id/profile_username"
+                    style="@style/edit_16"
+                    android:inputType="textPersonName" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                style="@style/text_14"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="Email"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:layout_marginVertical="@dimen/_5sdp"
+                app:cardBackgroundColor="@color/bg_color"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:cardElevation="@dimen/_3sdp">
+
+                <EditText
+                    android:id="@+id/profile_email"
+                    style="@style/edit_16"
+                    android:inputType="textEmailAddress" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                style="@style/text_14"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="Password"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:layout_marginVertical="@dimen/_5sdp"
+                app:cardBackgroundColor="@color/bg_color"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:cardElevation="@dimen/_3sdp">
+
+                <EditText
+                    android:id="@+id/profile_password"
+                    style="@style/edit_16"
+                    android:inputType="textPassword"
+                    android:maxLength="15" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/profile_confirm_password_title"
+                style="@style/text_14"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="Confirm Password"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/profile_confirm_password_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:layout_marginVertical="@dimen/_5sdp"
+                app:cardBackgroundColor="@color/bg_color"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:cardElevation="@dimen/_3sdp">
+
+                <EditText
+                    android:id="@+id/profile_confirm_password"
+                    style="@style/edit_16"
+                    android:inputType="textPassword"
+                    android:maxLength="15" />
+
+            </androidx.cardview.widget.CardView>
+
+            <RadioGroup
+                android:id="@+id/profile_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/profile_male"
+                    style="@style/radio_16"
+                    android:layout_weight="1"
+                    android:text="Male" />
+
+                <RadioButton
+                    android:id="@+id/profile_female"
+                    style="@style/radio_16"
+                    android:layout_weight="1"
+                    android:text="Female" />
+
+            </RadioGroup>
+
+            <Spinner
+                android:id="@+id/profile_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp" />
+
+            <Button
+                android:visibility="gone"
+                android:id="@+id/profile_edit"
+                style="@style/button_16"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="Edit Profile" />
+
+            <Button
+                android:id="@+id/profile_button"
+                style="@style/button_16"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="Submit" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
