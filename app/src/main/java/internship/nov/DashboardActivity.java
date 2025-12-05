@@ -23,7 +23,7 @@ public class DashboardActivity extends AppCompatActivity {
     SharedPreferences sp;
     SQLiteDatabase db;
 
-    Button profile,deleteProfile,logout;
+    Button profile,deleteProfile,logout,userList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,15 @@ public class DashboardActivity extends AppCompatActivity {
 
         email = findViewById(R.id.dashboard_email);
         email.setText(sp.getString(ConstantSp.NAME,""));
+
+        userList = findViewById(R.id.dashboard_users);
+        userList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DashboardActivity.this, UserListActivity.class);
+                startActivity(intent);
+            }
+        });
 
         profile = findViewById(R.id.dashboard_profile);
         profile.setOnClickListener(new View.OnClickListener() {
