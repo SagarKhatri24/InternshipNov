@@ -15,6 +15,9 @@
         android:theme="@style/Theme.InternshipNov"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".UserRecyclerActivity"
+            android:exported="false" />
+        <activity
             android:name=".UserListActivity"
             android:exported="false" />
         <activity

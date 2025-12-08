@@ -1,9 +1,12 @@
 package internship.nov;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -17,8 +20,10 @@ import java.util.ArrayList;
 
 public class UserListActivity extends AppCompatActivity {
 
-    ListView listView;
+    GridView listView;
     //String[] nameArray = {"John","Richard","Ibrahim","John","Richard","Ibrahim","John","Richard","Ibrahim","John","Richard","Ibrahim","John","Richard","Ibrahim","John","Richard","Ibrahim","John","Richard","Ibrahim","John","Richard","Ibrahim"};
+    SQLiteDatabase db;
+    ArrayList<UserList> arrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,10 @@ public class UserListActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        db = openOrCreateDatabase("Internship.db", MODE_PRIVATE, null);
+        String tableQuery = "CREATE TABLE IF NOT EXISTS USERS(USERID INTEGER PRIMARY KEY AUTOINCREMENT,NAME VARCHAR(50),EMAIL VARCHAR(50),PASSWORD VARCHAR(50),GENDER VARCHAR(10),CITY VARCHAR(20))";
+        db.execSQL(tableQuery);
 
         listView = findViewById(R.id.user_listview);
 
@@ -68,7 +77,7 @@ public class UserListActivity extends AppCompatActivity {
         });*/
 
         //Third Method
-        ArrayList<String> arrayList = new ArrayList<>();
+        /*ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("Richard");
         arrayList.add("Ibrahim");
         arrayList.add("Demo");
@@ -81,7 +90,7 @@ public class UserListActivity extends AppCompatActivity {
         arrayList.add(0,"Arpit");
 
         UserListAdapter adapter = new UserListAdapter(UserListActivity.this,arrayList);
-        listView.setAdapter(adapter);
+        listView.setAdapter(adapter);*/
 
         /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -89,6 +98,35 @@ public class UserListActivity extends AppCompatActivity {
                 Toast.makeText(UserListActivity.this, arrayList.get(i), Toast.LENGTH_SHORT).show();
             }
         });*/
+
+        //Fourth Method
+        String selectData = "SELECT * FROM USERS";
+        Cursor cursor = db.rawQuery(selectData,null);
+        if(cursor.getCount()>0){
+            arrayList = new ArrayList<>();
+           while (cursor.moveToNext()){
+               String sUserId = cursor.getString(0);
+               String sName = cursor.getString(1);
+               String sEmail = cursor.getString(2);
+               String sPassword = cursor.getString(3);
+               String sGender = cursor.getString(4);
+               String sCity = cursor.getString(5);
+
+               UserList list = new UserList();
+               list.setUserId(sUserId);
+               list.setName(sName);
+               list.setEmail(sEmail);
+               list.setGender(sGender);
+               list.setCity(sCity);
+
+               arrayList.add(list);
+           }
+            UserListAdapter adapter = new UserListAdapter(UserListActivity.this,arrayList);
+            listView.setAdapter(adapter);
+        }
+        else{
+            Toast.makeText(this, "User Not Found", Toast.LENGTH_SHORT).show();
+        }
 
     }
 }

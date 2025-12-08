@@ -9,4 +9,16 @@
         android:id="@+id/custom_user_name"
         style="@style/text_16"/>
 
+    <TextView
+        android:id="@+id/custom_user_email"
+        style="@style/text_14"/>
+
+    <TextView
+        android:id="@+id/custom_user_gender"
+        style="@style/text_14"/>
+
+    <TextView
+        android:id="@+id/custom_user_city"
+        style="@style/text_14"/>
+
 </LinearLayout>

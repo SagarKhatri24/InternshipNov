@@ -13,9 +13,15 @@ import java.util.ArrayList;
 public class UserListAdapter extends BaseAdapter {
 
     Context context;
-    ArrayList<String> arrayList;
+    //ArrayList<String> arrayList;
+    ArrayList<UserList> arrayList;
 
-    public UserListAdapter(Context context, ArrayList<String> arrayList) {
+    /*public UserListAdapter(Context context, ArrayList<String> arrayList) {
+        this.context = context;
+        this.arrayList = arrayList;
+    }*/
+
+    public UserListAdapter(Context context, ArrayList<UserList> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
     }
@@ -41,12 +47,19 @@ public class UserListAdapter extends BaseAdapter {
         view = layoutInflater.inflate(R.layout.custom_user,null);
 
         TextView name = view.findViewById(R.id.custom_user_name);
-        name.setText(arrayList.get(i));
+        TextView email = view.findViewById(R.id.custom_user_email);
+        TextView gender = view.findViewById(R.id.custom_user_gender);
+        TextView city = view.findViewById(R.id.custom_user_city);
+
+        name.setText(arrayList.get(i).getName());
+        email.setText(arrayList.get(i).getEmail());
+        gender.setText(arrayList.get(i).getGender());
+        city.setText(arrayList.get(i).getCity());
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, arrayList.get(i), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, arrayList.get(i).getName(), Toast.LENGTH_SHORT).show();
             }
         });
 
