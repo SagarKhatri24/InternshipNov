@@ -16,6 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -23,7 +26,7 @@ public class DashboardActivity extends AppCompatActivity {
     SharedPreferences sp;
     SQLiteDatabase db;
 
-    Button profile,deleteProfile,logout,userList,userRecycler;
+    Button profile,deleteProfile,logout,userList,userRecycler,activityFragment,whatsappTab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,24 @@ public class DashboardActivity extends AppCompatActivity {
 
         email = findViewById(R.id.dashboard_email);
         email.setText(sp.getString(ConstantSp.NAME,""));
+
+        whatsappTab = findViewById(R.id.dashboard_whatsapp_tab);
+        whatsappTab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DashboardActivity.this,WhatsappTabActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        activityFragment = findViewById(R.id.dashboard_activity_fragment);
+        activityFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DashboardActivity.this,ActivityToFragmentActivity.class);
+                startActivity(intent);
+            }
+        });
 
         userList = findViewById(R.id.dashboard_users);
         userList.setOnClickListener(new View.OnClickListener() {

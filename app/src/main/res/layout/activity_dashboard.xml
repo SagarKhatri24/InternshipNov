@@ -51,6 +51,20 @@
         android:text="User Recycler" />
 
     <Button
+        android:id="@+id/dashboard_activity_fragment"
+        style="@style/button_16"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="Activity To Fragment" />
+
+    <Button
+        android:id="@+id/dashboard_whatsapp_tab"
+        style="@style/button_16"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="Whatsapp Tab" />
+
+    <Button
         android:id="@+id/dashboard_logout"
         style="@style/button_16"
         android:layout_marginHorizontal="@dimen/_20sdp"
