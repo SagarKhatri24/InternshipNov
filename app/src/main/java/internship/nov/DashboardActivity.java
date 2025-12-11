@@ -26,7 +26,7 @@ public class DashboardActivity extends AppCompatActivity {
     SharedPreferences sp;
     SQLiteDatabase db;
 
-    Button profile,deleteProfile,logout,userList,userRecycler,activityFragment,whatsappTab;
+    Button profile,deleteProfile,logout,userList,userRecycler,activityFragment,whatsappTab,product;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,15 @@ public class DashboardActivity extends AppCompatActivity {
 
         email = findViewById(R.id.dashboard_email);
         email.setText(sp.getString(ConstantSp.NAME,""));
+
+        product = findViewById(R.id.dashboard_product);
+        product.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DashboardActivity.this, ProductActivity.class);
+                startActivity(intent);
+            }
+        });
 
         whatsappTab = findViewById(R.id.dashboard_whatsapp_tab);
         whatsappTab.setOnClickListener(new View.OnClickListener() {

@@ -65,6 +65,13 @@
         android:text="Whatsapp Tab" />
 
     <Button
+        android:id="@+id/dashboard_product"
+        style="@style/button_16"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="Products" />
+
+    <Button
         android:id="@+id/dashboard_logout"
         style="@style/button_16"
         android:layout_marginHorizontal="@dimen/_20sdp"

@@ -15,6 +15,9 @@
         android:theme="@style/Theme.InternshipNov"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".WhatsappTabActivity"
             android:exported="false" />
         <activity
