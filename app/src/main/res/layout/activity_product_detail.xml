@@ -6,6 +6,7 @@
     android:layout_marginHorizontal="@dimen/_10sdp"
     android:layout_marginVertical="@dimen/_5sdp"
     app:cardCornerRadius="@dimen/_10sdp"
+    android:id="@+id/main"
     app:cardElevation="@dimen/_3sdp">
 
     <LinearLayout
@@ -18,13 +19,13 @@
             android:layout_height="@dimen/_100sdp">
 
             <ImageView
-                android:id="@+id/custom_product_image"
+                android:id="@+id/product_detail_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/app_icon" />
 
             <TextView
-                android:id="@+id/custom_product_discount"
+                android:id="@+id/product_detail_discount"
                 style="@style/text_12"
                 android:background="@drawable/custom_discount"
                 android:drawableLeft="@drawable/down_arrow"
@@ -43,7 +44,7 @@
                 app:cardElevation="@dimen/_1sdp">
 
                 <TextView
-                    android:id="@+id/custom_product_rating"
+                    android:id="@+id/product_detail_rating"
                     style="@style/text_12"
                     android:drawableRight="@drawable/star"
                     android:drawablePadding="@dimen/_5sdp"
@@ -55,7 +56,7 @@
             </androidx.cardview.widget.CardView>
 
             <ImageView
-                android:id="@+id/custom_product_plus"
+                android:id="@+id/product_detail_plus"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_gravity="bottom|end"
@@ -72,7 +73,7 @@
             android:padding="@dimen/_5sdp">
 
             <TextView
-                android:id="@+id/custom_product_unit"
+                android:id="@+id/product_detail_unit"
                 style="@style/text_12"
                 android:background="@drawable/custom_bg_gray"
                 android:paddingHorizontal="@dimen/_5sdp"
@@ -81,7 +82,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/custom_product_title"
+                android:id="@+id/product_detail_title"
                 style="@style/text_14"
                 android:layout_marginTop="@dimen/_2sdp"
                 android:maxLines="2"
@@ -96,17 +97,17 @@
                 android:padding="@dimen/_1sdp">
 
                 <TextView
-                    android:layout_height="match_parent"
-                    android:id="@+id/custom_product_new_price"
+                    android:id="@+id/product_detail_new_price"
                     style="@style/text_14"
                     android:layout_width="@dimen/_50sdp"
+                    android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="117"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/custom_product_old_price"
+                    android:id="@+id/product_detail_old_price"
                     style="@style/text_12"
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="match_parent"
@@ -118,7 +119,21 @@
 
             </LinearLayout>
 
+            <TextView
+                android:justificationMode="inter_word"
+                android:id="@+id/product_detail_description"
+                style="@style/text_12"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="117"
+                android:textColor="#707070" />
+
         </LinearLayout>
+
+        <Button
+            android:id="@+id/product_detail_buy_now"
+            android:layout_margin="@dimen/_10sdp"
+            android:text="Buy Now"
+            style="@style/button_16"/>
 
     </LinearLayout>
 

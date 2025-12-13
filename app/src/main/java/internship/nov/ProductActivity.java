@@ -17,7 +17,7 @@ public class ProductActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     String[] discountPercentageArray = {"29", "38", "21", "43", "33"};
-    String[] packingArray = {"4 x 48 g", "1 x 500 g", "5 kg", "300 g Pack of 2", "300 g Pack of 2"}
+    String[] packingArray = {"4 x 48 g", "1 x 500 g", "5 kg", "300 g Pack of 2", "300 g Pack of 2"};
     String[] ratingArray = {"4.1", "4.2", "4.4", "4.3", "4.4"};
     String[] nameArray = {
             "Odonil Bathroom Air Freshener | Assorted Blocks | Mixed Fragrance | Long Lasting Odour Blocks",
@@ -43,7 +43,7 @@ public class ProductActivity extends AppCompatActivity {
             "Do you brush your teeth hurriedly? Do you often forget to use mouthwash or not use it at all? Are your teeth dull and covered with a yellowish coating of plaque? Do you have bad breath? If your answer to the above questions is yes, then New Closeup Gel Toothpaste with Zinc fresh technology is for you! Bad breath is a common condition that affects many people and has health as well as social implications. It can be caused by the millions of bacteria that live in your mouth. If you don't brush everyday plaque & germs can form resulting in bad breath. Closeup Gel Toothpaste has Zinc Fresh Technology which fights against 99% germs to give you 18 hrs of long-lasting fresh breath. Its proprietary technology gives intense freshness & burst of minty cooling. So, kiss goodbye to bad breath and say hello to longer lasting fresh breath for up to 18 hours*. Its purifying gel cleans to the deepest corners of your mouth. It also contains natural extracts of tea tree and eucalyptus which leave you feeling refreshed. Add Closeup Red Gel Toothpaste with Zinc Fresh Technology to your daily oral care routine and step out into the world with confidence! *Based on in- study with regular use over 4 weeks."
     };
 
-    ArrayList<ProductList> arrayList;
+    public static ArrayList<ProductList> arrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
