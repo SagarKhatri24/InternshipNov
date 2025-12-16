@@ -12,6 +12,8 @@ public class ConstantSp {
     public static final String GENDER = "gender";
     public static final String CITY = "city";
 
+    public static final String CATEGORYID = "category_id";
+
     public static final String PRODUCT_INDEX = "0";
 
 }

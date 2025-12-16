@@ -3,28 +3,24 @@ package internship.nov;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyHolder> {
+public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.MyHolder> {
 
     Context context;
-    ArrayList<CategoryList> arrayList;
+    ArrayList<SubCategoryList> arrayList;
     SharedPreferences sp;
 
-    public CategoryAdapter(Context context, ArrayList<CategoryList> arrayList) {
+    public SubCategoryAdapter(Context context, ArrayList<SubCategoryList> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
         sp = context.getSharedPreferences(ConstantSp.PREF,MODE_PRIVATE);
@@ -32,36 +28,33 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyHold
 
     @NonNull
     @Override
-    public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_category,parent,false);
-        return new MyHolder(view);
+    public SubCategoryAdapter.MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_sub_category,parent,false);
+        return new SubCategoryAdapter.MyHolder(view);
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {
 
         TextView name;
-        ImageView image;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.custom_category_name);
-            image = itemView.findViewById(R.id.custom_category_image);
+            name = itemView.findViewById(R.id.custom_sub_category_name);
         }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SubCategoryAdapter.MyHolder holder, int position) {
         holder.name.setText(arrayList.get(position).getName());
-        Glide.with(context).load(arrayList.get(position).getImage()).placeholder(R.drawable.app_icon).into(holder.image);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        /*holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sp.edit().putString(ConstantSp.CATEGORYID,arrayList.get(position).getId()).commit();
                 Intent intent = new Intent(context, SubCategoryActivity.class);
                 context.startActivity(intent);
             }
-        });
+        });*/
 
     }
 
